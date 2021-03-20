@@ -1,0 +1,23 @@
+{
+  "name": "open-secrets",
+  "version": "1.0.0",
+  "description": "a way to keep government accountable",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarrisonHemstreet/open-secrets.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HarrisonHemstreet/open-secrets/issues"
+  },
+  "homepage": "https://github.com/HarrisonHemstreet/open-secrets#readme",
+  "dependencies": {
+    "csvjson": "^5.1.0",
+    "fs": "0.0.1-security"
+  }
+}

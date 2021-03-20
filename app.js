@@ -69,31 +69,18 @@ const states = [
 
 let firstlastCIDArr = [];
 
-const nameOrCID = ["firstlast", "cid"];
+// const nameOrCID = ["firstlast", "cid"];
 
 
 
 async function getLegislators_() {
-    // console.log(states);
-    currState = [states[0]];
-    for(let i = 0; i < states.length; i++){
-        currState = states[i];
-    }
+
     const res = await fetch(`http://www.opensecrets.org/api/?method=getLegislators&id=tx&apikey=ab3cee75d329046cc5e263712b39b577&output=json`)
-    // console.log(res);
 
     const legislators = await res.json();
-    console.log(legislators.response.legislator[0]["@attributes"].cid);
-    // console.log(legislators.response.legislator[0]);
-
-    // //the way you retireve legislator's cid's
-    //  //legislators.response.legislator[NEED THIS TO BE A LOOP]["@attributes"].firstlast
-    // //legislators.response.legislator[NEED THIS TO BE A LOOP]["@attributes"].cid
-
-    // console.log(legislators.response.legislator[1]["@attributes"].firstlast);
-    // console.log(legislators.response.legislator[1]["@attributes"].cid);
-
-    return 'hi';
+    
+    console.log(legislators);
+    
 }
 
 async function loopStates() {
@@ -108,6 +95,7 @@ async function loopStates() {
             
             // loop through each legislator of each state logging out the state and each state legislator
             for(let j = 0; j < legislators.response.legislator.length; j++){
+
             //  push the first and last name (firstlast) into the array, THEN the legislator's CID
             //  All first and last names fall on an even index, all CID's fall onto an odd.
                 firstlastCIDArr.push(legislators.response.legislator[j]["@attributes"].firstlast,
@@ -116,7 +104,7 @@ async function loopStates() {
     }
 
     console.log(firstlastCIDArr);
-    
+
 }
 
 //for(let k = 0; k < legislators.response.legislator)

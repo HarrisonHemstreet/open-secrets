@@ -2,7 +2,10 @@
 //1.  candContrib: results of top contributors to specified candidate for a House or Senate seat or member of Congress. 
 //                 These are 6-year numbers for senators/Senate candidates; 2-year numbers for representatives/House candidates.
 
-
+//works for NJ
+fetch('http://www.opensecrets.org/api/?method=getLegislators&id=CA&apikey=ab3cee75d329046cc5e263712b39b577&output=json')
+    .then(res => res.json())
+    .then(console.log);
 
 
 

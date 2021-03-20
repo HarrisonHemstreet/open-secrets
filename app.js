@@ -1,6 +1,6 @@
-const csvjson = require('csvjson');
-const readFile = require('fs').readFile;
-const writeFile = require('fs').writeFile;
+// const csvjson = require('csvjson');
+// const readFile = require('fs').readFile;
+// const writeFile = require('fs').writeFile;
 //0. Figure out how to get CID's of different legislators
 //      NESTED ARRAY ORDERING
 //      i. USA
@@ -11,17 +11,10 @@ const writeFile = require('fs').writeFile;
 //          ** Save each CID number within each legislator into a new array
 //      iv. CID number
 
-let usa = [
-    let al = [
+//1. loop over states within each query
+//2. make the key be the legislator's name, the value the CID - JUST ONE BIG OBJECT
 
-    ],
-    let ak = [
-        
-    ],
-
-]
-
-let usaStates = [
+let states = [
     "al",
     "ak",
     "az",
@@ -72,22 +65,41 @@ let usaStates = [
     "wv",
     "wi",
     "wy"
-]
+];
 
 
 
 async function getLegislators_() {
-    
-    const res = await fetch('http://www.opensecrets.org/api/?method=getLegislators&id=NJ&apikey=ab3cee75d329046cc5e263712b39b577&output=json')
+    // console.log(states);
+    currState = [states[0]];
+    for(let i = 0; i < states.length; i++){
+        currState = states[i];
+    }
+    const res = await fetch(`http://www.opensecrets.org/api/?method=getLegislators&id=${currState}&apikey=ab3cee75d329046cc5e263712b39b577&output=json`)
     // console.log(res);
 
     const legislators = await res.json();
     console.log(legislators);
-    console.log(legislators.response.legislator[0]);
+    // console.log(legislators.response.legislator[0]);
 
-    //the way you retireve legislator's cid's
-    console.log(legislators.response.legislator[0]["@attributes"].cid);
+    // //the way you retireve legislator's cid's
+    //  //legislators.response.legislator[NEED THIS TO BE A LOOP]["@attributes"].firstlast
+    // //legislators.response.legislator[NEED THIS TO BE A LOOP]["@attributes"].cid
+
+    // console.log(legislators.response.legislator[1]["@attributes"].firstlast);
+    // console.log(legislators.response.legislator[1]["@attributes"].cid);
+
     return 'hi';
+}
+
+async function loopStates() {
+    for(let i = 0; i < 50; i++){
+        // async function getLegis() {
+            const res = await fetch(`http://www.opensecrets.org/api/?method=getLegislators&id=${states[i]}&apikey=ab3cee75d329046cc5e263712b39b577&output=json`)
+            console.log(i, res);
+            console.log(states[i]);
+        // }
+    }
 }
 
 

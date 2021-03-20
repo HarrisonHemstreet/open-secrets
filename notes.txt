@@ -1,0 +1,8 @@
+HERE ARE MY NOTES:
+
+In order to use most requests, you first need to use the getLegislators method in order to retrieve each legislators' CID
+(canadite identifcation number).
+
+So the way I'm thinking about currently going about this right now, 
+// is when I search up a name, the searchedName should 1. ACESS THE CID from a SQL table, 2. Implement that CID into a POST query
+// The options from a drop down menu should control the actual Open Secrets API method I call at that time.

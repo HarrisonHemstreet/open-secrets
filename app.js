@@ -14,7 +14,7 @@
 //1. loop over states within each query
 //2. make the key be the legislator's name, the value the CID - JUST ONE BIG OBJECT
 
-let states = [
+const states = [
     "al",
     "ak",
     "az",
@@ -67,6 +67,10 @@ let states = [
     "wy"
 ];
 
+let firstlastCIDArr = [];
+
+const nameOrCID = ["firstlast", "cid"];
+
 
 
 async function getLegislators_() {
@@ -79,7 +83,7 @@ async function getLegislators_() {
     // console.log(res);
 
     const legislators = await res.json();
-    console.log(legislators.response.legislator.length);
+    console.log(legislators.response.legislator[0]["@attributes"].cid);
     // console.log(legislators.response.legislator[0]);
 
     // //the way you retireve legislator's cid's
@@ -95,19 +99,27 @@ async function getLegislators_() {
 async function loopStates() {
     // loop through every state
     for(let i = 0; i < 50; i++){
+
             // make a request to each state taking the index of each state
             const res = await fetch(`http://www.opensecrets.org/api/?method=getLegislators&id=${states[i]}&apikey=ab3cee75d329046cc5e263712b39b577&output=json`)
+            
             // save each state's info to a variable legislators
             const legislators = await res.json();
+            
             // loop through each legislator of each state logging out the state and each state legislator
             for(let j = 0; j < legislators.response.legislator.length; j++){
-                console.log(states[i], legislators.response.legislator[i])
+            //  push the first and last name (firstlast) into the array, THEN the legislator's CID
+            //  All first and last names fall on an even index, all CID's fall onto an odd.
+                firstlastCIDArr.push(legislators.response.legislator[j]["@attributes"].firstlast,
+                                    legislators.response.legislator[j]["@attributes"].cid);
             }
-            // console.log(i, res);
-            // console.log(states[i]);
     }
+
+    console.log(firstlastCIDArr);
+    
 }
 
+//for(let k = 0; k < legislators.response.legislator)
 
 //Make an API call to the Open-Secrets API for info on:
 //1.  candContrib: results of top contributors to specified candidate for a House or Senate seat or member of Congress. 

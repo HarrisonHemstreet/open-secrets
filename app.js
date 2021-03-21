@@ -67,7 +67,7 @@ const states = [
     "wy"
 ];
 
-let firstlastCIDArr = [];
+let firstlastCIDArr = ["Name", "CID"];
 
 // const nameOrCID = ["firstlast", "cid"];
 
@@ -78,12 +78,13 @@ async function getLegislators_() {
     const res = await fetch(`http://www.opensecrets.org/api/?method=getLegislators&id=tx&apikey=ab3cee75d329046cc5e263712b39b577&output=json`)
 
     const legislators = await res.json();
-    
+
     console.log(legislators);
     
 }
 
-async function loopStates() {
+// THIS FUNCTION WORKS, you just need to wait like 10 or 20 seconds
+async function pushNamesAndCIDsIntoArray() {
     // loop through every state
     for(let i = 0; i < 50; i++){
 
@@ -102,12 +103,23 @@ async function loopStates() {
                                     legislators.response.legislator[j]["@attributes"].cid);
             }
     }
-
+    
+    // This log should have all names and cid's of each legislator. EXAMPLE:
+    // firstlast, cid [john doe, MD004334, ...]
     console.log(firstlastCIDArr);
 
 }
 
-//for(let k = 0; k < legislators.response.legislator)
+
+// We now have a function (pushNamesAndCIDsIntoArray) which takes all CID's and names from each legislator and pushes them into an array
+// I need to take this new array which looks like this: ["Name", "CID", "Bradley Byrne", "N00035380", "Martha Roby", "N00030768", ...]
+// STEPS FOR CHANGING ARRAY INTO AN .csv FILE!: (maybe do this with python, bc it's pretty easy)
+// 1. convert the whole thing into a text file. Each value just separated by commas
+// 2. after every odd value, make a new line
+
+
+
+
 
 //Make an API call to the Open-Secrets API for info on:
 //1.  candContrib: results of top contributors to specified candidate for a House or Senate seat or member of Congress. 

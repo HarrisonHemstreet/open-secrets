@@ -1,3 +1,41 @@
+const express = require("express");
+const app = express();
+const PORT = 5000;
+
+app.listen(
+    PORT, 
+    () => console.log(`App has started on http://localhost/${PORT}`)
+);
+
+app.get('/tshirt', (req, res) => {
+    res.status(200).send({
+        tshirt: '👕',
+        size: 'large'
+    })
+});
+
+app.post('/tshirt/:id', (req, res) => {
+    
+    const {id} = req.params;
+    const {logo} = req.body;
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const csvjson = require('csvjson');
 // const readFile = require('fs').readFile;
 // const writeFile = require('fs').writeFile;
@@ -67,7 +105,9 @@ const states = [
     "wy"
 ];
 
-let firstlastCIDArr = ["Name", "CID"];
+let firstlastCIDArr = [];
+
+let arrayHeader = ["Name", "CID"]
 
 // const nameOrCID = ["firstlast", "cid"];
 
@@ -106,9 +146,26 @@ async function pushNamesAndCIDsIntoArray() {
     
     // This log should have all names and cid's of each legislator. EXAMPLE:
     // firstlast, cid [john doe, MD004334, ...]
-    console.log(firstlastCIDArr);
+    // let csv = firstlastCIDArr.toString(); 
+    // document.write(csv) 
+    
 
+    // for(let t = 0; t < firstlastCIDArr.length; t++) {
+    //     t % 2 !== 0 ? (
+    //         firstlastCIDArr[t].unshift('t')
+    //     ) : (
+    //         console.log('odd')
+    //         )
+    // }
+
+    // document.getElementById('api-result').innerHTML(firstlastCIDArr);
+    // document.write(firstlastCIDArr);
+    console.log(firstlastCIDArr);
+    
 }
+
+
+// On every odd index, add quotation marks around the name. So shift one quote mark at the beginning and one quote mark at the end
 
 
 // We now have a function (pushNamesAndCIDsIntoArray) which takes all CID's and names from each legislator and pushes them into an array

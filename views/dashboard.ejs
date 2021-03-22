@@ -7,10 +7,22 @@
     <title>Dashboard</title>
 </head>
 <body>
+    <!-- This should be the page most of the API calls happen -->
     
     <h1>Dashboard</h1>
 
     <h2>Hello <%= user.charAt(0).toUpperCase() + user.slice(1) %></h2>
+
+    <!-- List of radios I can select in order to choose which API call I want to make -->
+
+    <!-- GOALS: -->
+    <!-- 1. After creating a user, sign in and land on /users/dashboard -->
+    <!-- 2. Choose which API call you wish to implement from a series of radios -->
+    <!-- 3. Enter in the name of the desired person -->
+    <!-- 4. Hit submit and have the API call go out, returning a GUI table with all requested data -->
+
+
+
     <a href="/users/logout">Logout</a>
 </body>
 </html>

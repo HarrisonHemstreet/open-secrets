@@ -10,7 +10,7 @@
     
     <h1>Dashboard</h1>
 
-    <h2>Hello <%= user %></h2>
+    <h2>Hello <%= user.charAt(0).toUpperCase() + user.slice(1) %></h2>
     <a href="/users/logout">Logout</a>
 </body>
 </html>

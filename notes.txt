@@ -12,3 +12,16 @@ CID RETRIVEAL!
 1. make an array of all USA state's abreviations
 2. Make a function that loops through this array, replacing the state's id into the axios requests
 3. Take CID data + 'first last name' and make a .csv file/table
+
+
+
+MAKE A table FOR EACH USER!
+Make a table that includes all Users's favorite API calls so that the user can see all this focused information easily.
+1. First table in this manner will be for legislators that they want to watch
+2. Second table will be for all their favorite calls
+3. Think of more tables that can be used in this way to make this app more useful to the user/faster for the user to read the data
+4. make a table for the user's API call history
+
+IN ORDER TO OPEN UP THE LOGIN POSTGRESQL DB:
+1. open terminal
+2. enter this: psql -U hhemstreet -d op_sec_login

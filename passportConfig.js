@@ -1,11 +1,14 @@
+// Passport is used for authentication
 const LocalStrategy = require("passport-local").Strategy;
 const { pool } = require("./dbConfig");
 const bcrypt = require("bcrypt");
 
+// main passport function
 function initialize(passport) {
 
     const authenticateUser = (email, password, done) => {
 
+        // check if the user exists
         pool.query(
             "SELECT * FROM users WHERE email = $1", 
             [email], 
@@ -19,6 +22,7 @@ function initialize(passport) {
                 if(results.rows.length > 0) {
                     const user = results.rows[0];
 
+                    // bcrypt specific function, compare()
                     bcrypt.compare(password, user.password, (err, isMatch) => {
                             if(err) {
                                 throw err;

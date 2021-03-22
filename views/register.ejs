@@ -8,6 +8,8 @@
 </head>
 <body>
 
+    <!-- Display Errors -->
+
     <h1>Register</h1>
         <% if(typeof errors != "undefined") { %>
             <% errors.forEach(error => { %>
@@ -17,6 +19,8 @@
     <ul>
 
     </ul>
+
+    <!-- Register Form -->
     
     <form action="/register" method="POST">
         <div>

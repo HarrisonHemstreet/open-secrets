@@ -29,33 +29,39 @@ app.use(passport.session());
 
 app.use(flash());
 
+// home
 app.get("/", (req, res) => {
     res.render("index");
-    // res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
-
+//register
 app.get("/users/register", checkAuthenticated, (req, res) => {
     res.render("register");
 });
-    
+
+// Login
 app.get("/users/login", checkAuthenticated, (req, res) => {
     res.render("login");
 });
 
+// Dashboard
 app.get("/users/dashboard", checkNotAuthenticated, (req, res) => {
     res.render("dashboard", { user: req.user.name });
 });
 
+// Logout
 app.get("/users/logout", (req, res) => {
     req.logout();
     req.flash("success_msg", "You have logged out");
     res.redirect("/users/login");
 })
 
+
+// Register for an account
 app.post("/register", async (req, res) => {
     let { name, email, password, password2 } = req.body;
 
+    // logs to the terminal
     console.log({
         name,
         email,
@@ -80,9 +86,11 @@ app.post("/register", async (req, res) => {
         res.render('register', { errors });
     } else {
 
+        // use bcrypt to has the password 10 times. Despite two passwords being the exact same, their hashes may be different
         let hashedPassword = await bcrypt.hash(password, 10);
         console.log(hashedPassword);
 
+        // Check if email is free to use
         pool.query(
             "SELECT * FROM users WHERE email = $1", 
             [email], 
@@ -97,6 +105,7 @@ app.post("/register", async (req, res) => {
                     errors.push({ message: "Email already registered"});
                     res.render("register", { errors })
                 } else {
+                    // register new user
                     pool.query(
                         "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id, password", 
                         [name, email, hashedPassword], 
@@ -117,6 +126,7 @@ app.post("/register", async (req, res) => {
     }
 });
 
+// Check to see if the user is logged in while they are on the login page. If they are, send them to the dashboard
 app.post("/login", passport.authenticate("local", {
         successRedirect: "/users/dashboard",
         failRedirect: "/users/login",
@@ -124,6 +134,7 @@ app.post("/login", passport.authenticate("local", {
     })
 );
 
+// if a user is authenticated, then send to the dashboard
 function checkAuthenticated(req, res, next) {
     if(req.isAuthenticated()){
         return res.redirect("/users/dashboard");
@@ -131,6 +142,7 @@ function checkAuthenticated(req, res, next) {
     next();
 }
 
+// check if a user is NOT authenticated, then send to login
 function checkNotAuthenticated(req, res, next) {
     if(req.isAuthenticated()){
        return next();

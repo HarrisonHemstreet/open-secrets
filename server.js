@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const session = require("express-session");
 const flash = require("express-flash");
 const passport = require("passport");
+const path = require('path');
 
 const initializePassport = require("./passportConfig");
 
@@ -30,6 +31,7 @@ app.use(flash());
 
 app.get("/", (req, res) => {
     res.render("index");
+    // res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
 

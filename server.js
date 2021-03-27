@@ -79,7 +79,7 @@ app.get("/users/logout", (req, res) => {
     req.logout();
     req.flash("success_msg", "You have logged out");
     res.redirect("/users/login");
-})
+});
 
 // GOOGLE AUTHENTICATION LINE 84 - 103
 app.get("/here", (req, res) => res.send("You Are Not Logged In!"));
